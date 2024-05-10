@@ -13,8 +13,8 @@
 | |- <Products>
 | |- <Pagination>
 <Cart>
-|-
-|-
-|-
-|-
-|-
+|- <ProductsOnCart>
+| |- <ProductCard>
+|- <Order>
+| |- <Line>
+|- <ChangePromocode>

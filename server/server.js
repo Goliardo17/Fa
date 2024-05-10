@@ -4,6 +4,7 @@ const app = express()
 const fs= require("fs")
 const { getFilterLists } = require("./helpers/getFilterList")
 const { getElementOnPage } = require("./helpers/getElementByFilters")
+const { changeCart } = require("./helpers/changeCart")
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -36,9 +37,31 @@ app.get("/products", (req, res) => {
     }
     const sorting = params.sorting
     const page = params.pageNumber
-    console.log(params)
+    // console.log(params)
     const data = getElementOnPage(filters, sorting, page)
     res.send(JSON.stringify(data))
+})
+
+app.get("/cart", (req, res) => {
+    const json = fs.readFileSync("user.json").toString()
+    res.send(json)
+})
+
+app.use(express.json()) 
+// почему сервер после пост запроса перезапускается ?
+// убрать action из user.json
+app.post("/cart/change", (req, res) => {
+    const product = req.body
+
+    console.log(product)
+
+    const newUserCart = changeCart(product)
+
+    const json = JSON.stringify({productsInCart:newUserCart})
+
+    fs.writeFileSync("user.json", json)
+    res.json(json)
+    res.status(500)
 })
 
 app.listen(8000, () => console.log("server running..."))

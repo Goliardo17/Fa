@@ -13,7 +13,7 @@ export const Price = ({ filters, changeFilterForm }) => {
   const minPosition = ((minValue - min) / (max - min)) * 100;
   const maxPosition = ((maxValue - min) / (max - min)) * 100;
 
-  const debouncedChangeFilter = debounce(changeFilterForm, 1000) // по какой то причине дебаунс работает не так как должен
+  const debouncedChangeFilter = debounce(changeFilterForm, 600) // по какой то причине дебаунс работает не так как должен
 
   const changeMin = (key, value) => {
     const number = Number(value)
