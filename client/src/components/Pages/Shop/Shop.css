@@ -1,0 +1,27 @@
+.shop {
+    max-width: 1200px;
+
+    display: flex;
+    flex-direction: row;
+    gap: 50px;
+}
+
+.showcase {
+    max-width: 847px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.sorting {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.products {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 30px;
+}

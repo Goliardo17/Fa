@@ -1,0 +1,38 @@
+.menu {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+  
+    padding: 0;
+    margin: 0;
+    margin-bottom: 25px;
+  }
+  
+  .menu li {
+    height: 20px;
+    display: flex;
+    flex-direction: row;
+  
+    align-items: center;
+    gap: 5px;
+  
+    list-style: none;
+  }
+  
+  .li-counter {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    justify-content: center;
+    
+    --size: 20px;
+    width: var(--size);
+    height: var(--size);
+    border-radius: 50%;
+    
+    background: black;
+    color: white;
+  
+    font-size: 14px;
+    font-weight: 700;
+  }

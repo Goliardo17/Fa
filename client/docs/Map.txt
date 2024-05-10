@@ -1,0 +1,20 @@
+<Header>
+|- <Logo>
+|- <Menu>
+|- <Icons>
+<Shop>
+|- <Sidebar>
+| |- <Searching>
+| |- <Categories>
+| |- <Price>
+| |- <Colors>
+|- <Showcase>
+| |- <Sorting>
+| |- <Products>
+| |- <Pagination>
+<Cart>
+|-
+|-
+|-
+|-
+|-
