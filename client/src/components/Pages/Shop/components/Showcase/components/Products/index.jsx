@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 
-export const Products = ({ products }) => {
+export const Products = ({ products, changeFavorite, favoriteInfo }) => {
 
   const addProductInCart = (product) => {
     fetch("http://localhost:8000/cart/change", {
@@ -21,6 +21,9 @@ export const Products = ({ products }) => {
         <div key={product.id}>
           {product.isSale ? <p>sale</p> : null}
           {product.isNew ? <p>new</p> : null}
+          <img src={favoriteInfo.filter((favProduct) => favProduct.id === product.id).length ? "added-favorite.svg" : "none-favorite.svg"}
+            onClick={() => changeFavorite(product)}
+          />
           <img 
             src={product.image}
             width={262} 

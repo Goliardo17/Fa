@@ -4,7 +4,8 @@ const app = express()
 const fs= require("fs")
 const { getFilterLists } = require("./helpers/getFilterList")
 const { getElementOnPage } = require("./helpers/getElementByFilters")
-const { changeCart } = require("./helpers/changeCart")
+const { changeCart, changeOrder, changePromocode } = require("./helpers/changeCart")
+const { writeUserFile } = require('./helpers/changeFavorite')
 
 app.use((req, res, next) => {
     res.setHeader('Access-Control-Allow-Origin', '*')
@@ -42,6 +43,12 @@ app.get("/products", (req, res) => {
     res.send(JSON.stringify(data))
 })
 
+app.get("/products/favorite", (req, res) => {
+    const file = fs.readFileSync("user.json").toString()
+
+    res.send(file)
+})
+
 app.get("/cart", (req, res) => {
     const json = fs.readFileSync("user.json").toString()
     res.send(json)
@@ -52,16 +59,35 @@ app.use(express.json())
 // убрать action из user.json
 app.post("/cart/change", (req, res) => {
     const product = req.body
-
-    console.log(product)
-
     const newUserCart = changeCart(product)
-
-    const json = JSON.stringify({productsInCart:newUserCart})
+    const newJson = changeOrder(newUserCart)
+    const json = JSON.stringify(newJson)
 
     fs.writeFileSync("user.json", json)
-    res.json(json)
-    res.status(500)
+    res.setHeader('Content-Type', 'application/JSON')
+    res.send(json)
+})
+
+app.post("/products/favorite/change", (req, res) => {
+    const {addproduct} = req.body // {addproduct: product}
+    const favoritesList = writeUserFile(addproduct)
+
+    res.setHeader('Content-Type', 'application/JSON')
+    res.send(JSON.stringify(favoritesList))
+})
+
+app.post("/cart/promocode", (req, res) => {
+    const product = req.body
+    const newJson = changePromocode(product.promocode)
+
+    if (newJson) {
+        const json = JSON.stringify(newJson)
+
+        res.setHeader('Content-Type', 'application/JSON')
+        res.send(json)
+    }
+
+    res.send()
 })
 
 app.listen(8000, () => console.log("server running..."))

@@ -1,28 +1,28 @@
 import React from "react";
 import { Line } from "./components/Line/index.jsx"
 
-export const Order = () => (
+export const Order = ({ order }) => (
     <div>
       <h3>You order</h3>
       <Line
         name={"line"}
         text="Order price"
-        // value={priceOrder !== 0 ? `$${priceOrder}` : "-"}
+        value={order.orderPrice !== 0 ? `$${order.orderPrice}` : "-"}
       />
       <Line
         name={"line"}
         text="Discount for promo code"
-        // value={promoCode ? "Yes" : "No"}
+        value={order.promocode ? "Yes" : "No"}
       />
       <Line 
         name={"line"} 
         text="Delivery" 
-        // value={orderPrice() !== 0 ? `$${DELIVERY_PRICE}` : "-"} 
+        value={order.deliveryPrice !== 0 ? `$${order.deliveryPrice}` : "-"} 
       />
       <Line
         name={"line total"}
         text="Total"
-        // value={priceTotal !== 0 ? `$${priceTotal}` : "-"}
+        value={order.totalPriceOrder !== 0 ? `$${order.totalPriceOrder}` : "-"}
       />
     </div>
 )

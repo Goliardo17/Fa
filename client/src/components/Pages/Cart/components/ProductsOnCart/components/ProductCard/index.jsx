@@ -1,16 +1,6 @@
 import React, { useState } from "react";
 
-export const ProductCard = ({ product, quantity, changeCart }) => {
-  // const [] = useState()
-
-  const creatBodyRequest = (product, action, quantity) => {
-    changeCart({
-      product: product,
-      action: action,
-      quantity: quantity
-    })
-  }
-
+export const ProductCard = ({ product, quantity, priceAmount, creatBodyRequest }) => {
   return (
     <div>
       <div>
@@ -29,9 +19,10 @@ export const ProductCard = ({ product, quantity, changeCart }) => {
               <button onClick={() => creatBodyRequest(product, "add", 1)}> + </button>
             </div>
         
-            <p>${
-                  // sum()
-                }
+            <p>
+              {
+                priceAmount ? `$${priceAmount}` : 0
+              }
             </p>
         </div>
       </div>

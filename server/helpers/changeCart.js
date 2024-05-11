@@ -1,5 +1,26 @@
 const fs = require("fs")
 
+const readFileUser = () => {
+    const file = fs.readFileSync("user.json").toString()
+    const user = JSON.parse(file)
+
+    return user
+}
+
+const writeFileUser = (obj) => {
+    const user = JSON.stringify(obj)
+    fs.writeFileSync("user.json", user)
+}
+
+const FILE = readFileUser()
+
+const ORDER_INFO = {
+    orderPrice: 0,
+    promocode: false,
+    deliveryPrice: 15,
+    totalPriceOrder: 0
+}
+
 const mathFunction = (productInCart, addProduct) => {
     if (addProduct.action === "add") {
         productInCart.quantity++
@@ -7,14 +28,14 @@ const mathFunction = (productInCart, addProduct) => {
     }
 
     productInCart.quantity--
-    productInCart.quantity <= 0 ? productInCart.quantity = 0 : null
+    productInCart.quantity <= 1 ? productInCart.quantity = 1 : null
+    console.log(productInCart.quantity)
     return
 }
 
 module.exports = {
     changeCart: (addProduct) => {
-        const user = fs.readFileSync("user.json").toString()
-        const userCart = JSON.parse(user).productsInCart
+        const userCart = FILE.productsInCart
         console.log(addProduct.action)
 
         if (!userCart.length) {
@@ -40,7 +61,7 @@ module.exports = {
 
         // change
         if (addProduct.action === "change") {
-            if (addProduct.quantity < 0) return
+            if (addProduct.quantity < 1) return userCart
 
             const newUserCart = userCart.map((productInCart) => {
                 if (productInCart.product.id === addProduct.product.id) {
@@ -63,5 +84,38 @@ module.exports = {
         })
 
         return newUserCart
+    },
+    changeOrder: (newUserCart) => {
+        const orderInfo = FILE.orderInfo ? FILE.orderInfo : ORDER_INFO
+        orderInfo.orderPrice = 0
+
+        console.log(orderInfo)
+    
+        newUserCart.map((productInCart) => {
+            const price = productInCart.product.price
+            const quantity = productInCart.quantity
+            productInCart.amountProduct = Number(price) * Number(quantity)
+            orderInfo.orderPrice += productInCart.amountProduct
+            
+            return productInCart
+        })
+    
+        return {productsInCart: newUserCart, orderInfo: orderInfo}
+    },
+    changePromocode: (string) => {
+        if (!FILE.orderInfo) {
+            return
+        }
+
+        if (string === "ilovereact") {
+            FILE.orderInfo.promocode = true
+            writeFileUser(FILE)
+
+            return FILE
+        }
+        
+        FILE.orderInfo.promocode = false
+        writeFileUser(FILE)
+        return FILE
     }
 }

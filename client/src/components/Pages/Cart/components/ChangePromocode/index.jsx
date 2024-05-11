@@ -1,6 +1,9 @@
-import React from "react";
+import React, { useState } from "react";
 
-export const ChangePromocode = () => (
+export const ChangePromocode = ({ changeOrder }) => {
+  const [inputPromocode, setInputPromocode] = useState("")
+
+  return (
     <div>
       <h4>You have a promo code?</h4>
       <p>
@@ -10,11 +13,11 @@ export const ChangePromocode = () => (
       <div>
         <input 
             placeholder="Enter promo code" 
-            // onChange={(e) => setInputValue(e.target.value)} 
+            onChange={(e) => setInputPromocode(e.target.value)} 
         />
         <button 
-            // onClick={() => compare(inputValue)} 
-            // disabled={!inputValue}
+            onClick={() => changeOrder(inputPromocode)} 
+            disabled={!inputPromocode}
         >send</button>
       </div>
       <div>
@@ -22,4 +25,4 @@ export const ChangePromocode = () => (
         <p>FB - TW - INS - PT</p>
       </div>
     </div>
-)
+)}
