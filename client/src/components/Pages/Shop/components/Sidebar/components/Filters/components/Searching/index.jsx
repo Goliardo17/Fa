@@ -10,6 +10,7 @@ export const Searching = ({ changeFilterForm }) => {
   
   return (
     <input 
+        className="sidebar-searching"
         onChange={(e) => filtersDebounced(e.target.value)} 
         placeholder="Search" 
     />

@@ -1,0 +1,52 @@
+.sidebar {
+    width: 170px;
+    display: flex;
+    flex-direction: column;
+}
+
+.sidebare-filters {
+    display: flex;
+    flex-direction: column;
+
+    .sidebar-searching {
+        border: none;
+        border-bottom: solid 1px gray;
+    }
+
+    h4 {
+        padding-bottom: 8px;
+        border-bottom: solid 1px black;
+    }
+
+    label {
+        display: flex;
+        flex-direction: row;
+        margin-left: 8px;
+
+        gap: 8px;
+    }
+
+    .list {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+    }
+
+    .sidebar-category {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            display: none;
+        }
+    }
+
+    .sidebar-color {
+        display: flex;
+        flex-direction: column;
+
+        input {
+            display: none;
+        }
+    }
+}

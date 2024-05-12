@@ -1,8 +1,7 @@
 import React from "react"
-// import "./Pagination.css"
 
 export const Pagination = ({ page, pages, changeFilterForm }) => (
-    <div>
+    <div className="pagination">
         <button 
         onClick={() => changeFilterForm("pageNumber", page - 1)}
         >-</button>

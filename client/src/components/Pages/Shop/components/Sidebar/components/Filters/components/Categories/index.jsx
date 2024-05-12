@@ -1,22 +1,28 @@
 import React from "react"
 
-export const Categories = ({ filters, changeFilterForm }) => {
+export const Categories = ({ filters, changeFilterForm, filterForm }) => {
   return (
-    <div>
+    <div className="sidebar-category">
       <h4>Categories</h4>
+      <div className="list">
       {
         filters.map((item) => 
-            <div key={"category-" + item}>
+            <label key={"category-" + item}>
+                {
+                  item !== filterForm.category ? <img src="bg.svg" /> : <img src="line.svg" />
+                }
                 <input 
-                    name="categories" 
-                    value={item} 
-                    type="radio" 
-                    onChange={(e) => changeFilterForm("category", e.target.value)} 
+                  className="category"
+                  name="categories" 
+                  value={item} 
+                  type="radio" 
+                  onChange={(e) => changeFilterForm("category", e.target.value)} 
                 />
-                <label>{item}</label>
-            </div>
+                <span>{item}</span>
+            </label> 
         )
       }
+      </div>
     </div>
   )
 }

@@ -1,8 +1,20 @@
 import React from "react";
 
-const LINKS = ["Favorite", "Cart"]
-
-export const Icons = () => 
-    <ul class="menu">
-      {LINKS.map(item => <li>{item}</li>)}
-    </ul>
+export const Icons = ({ setPage, favoriteInfo, productsInCart }) => (
+  <div className="right-menu">
+    <img src="search.svg"/>
+    <img src="user.svg" />
+    <div className="counter">
+      <img src="none-favorite.svg"/>
+      <p>
+        {favoriteInfo.length}
+      </p>
+    </div>
+    <div className="counter" onClick={() => setPage("Cart")}>
+      <img src="shopping-bag.svg"/>
+      <p >
+        {productsInCart.length}
+      </p>
+    </div>
+  </div>
+)

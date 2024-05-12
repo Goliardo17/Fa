@@ -1,9 +1,12 @@
 import React from "react"
 import "./Menu.css"
 
-const LINKS = ["Home","Pages","Shop","Blog","Contact"]
-
-export const Menu = () => 
-  <ul class="menu">
-    {LINKS.map(item => <li>{item}</li>)}
+export const Menu = ({ page, setPage }) => (
+  <ul className="menu">
+    <li>Home</li>
+    <li>Pages</li>
+    <li onClick={() => setPage("Shop")}>Shop</li>
+    <li>Blog</li>
+    <li>Contact</li>
   </ul>
+)

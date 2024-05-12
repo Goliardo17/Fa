@@ -40,6 +40,8 @@ module.exports = {
 
         if (!userCart.length) {
             userCart.push(addProduct)
+            FILE.productsInCart = userCart
+            writeFileUser(FILE)
 
             return userCart
         }
@@ -48,6 +50,8 @@ module.exports = {
 
         if (!cheked.length) {
             userCart.push(addProduct)
+            FILE.productsInCart = userCart
+            writeFileUser(FILE)
 
             return userCart
         }
@@ -55,6 +59,8 @@ module.exports = {
         // clear
         if (addProduct.action === "clear") {
             const newUserCart = userCart.filter((productInCart) => productInCart.product.id !== addProduct.product.id)
+            FILE.productsInCart = newUserCart
+            writeFileUser(FILE)
 
             return newUserCart
         }
@@ -70,6 +76,9 @@ module.exports = {
 
                 return productInCart
             })
+
+            FILE.productsInCart = newUserCart
+            writeFileUser(FILE)
     
             return newUserCart
         }
@@ -83,24 +92,30 @@ module.exports = {
             return productInCart
         })
 
+        FILE.productsInCart = newUserCart
+        writeFileUser(FILE)
+
         return newUserCart
     },
     changeOrder: (newUserCart) => {
-        const orderInfo = FILE.orderInfo ? FILE.orderInfo : ORDER_INFO
-        orderInfo.orderPrice = 0
 
-        console.log(orderInfo)
+        if (!FILE.orderInfo) {
+            FILE.orderInfo = ORDER_INFO
+        }
+
+        FILE.orderInfo.orderPrice = 0
     
         newUserCart.map((productInCart) => {
             const price = productInCart.product.price
             const quantity = productInCart.quantity
             productInCart.amountProduct = Number(price) * Number(quantity)
-            orderInfo.orderPrice += productInCart.amountProduct
+            FILE.orderInfo.orderPrice += productInCart.amountProduct
             
             return productInCart
         })
     
-        return {productsInCart: newUserCart, orderInfo: orderInfo}
+        writeFileUser(FILE)
+        return FILE
     },
     changePromocode: (string) => {
         if (!FILE.orderInfo) {

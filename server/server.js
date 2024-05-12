@@ -56,14 +56,12 @@ app.get("/cart", (req, res) => {
 
 app.use(express.json()) 
 // почему сервер после пост запроса перезапускается ?
-// убрать action из user.json
 app.post("/cart/change", (req, res) => {
     const product = req.body
     const newUserCart = changeCart(product)
     const newJson = changeOrder(newUserCart)
     const json = JSON.stringify(newJson)
 
-    fs.writeFileSync("user.json", json)
     res.setHeader('Content-Type', 'application/JSON')
     res.send(json)
 })

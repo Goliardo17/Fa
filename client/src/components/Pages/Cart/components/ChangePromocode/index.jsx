@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+import "./ChangePromocode.css"
 
 export const ChangePromocode = ({ changeOrder }) => {
   const [inputPromocode, setInputPromocode] = useState("")
 
   return (
-    <div>
+    <div className="change-promocode">
       <h4>You have a promo code?</h4>
       <p>
         To receive up-to-date promotional codes, subscribe to us on social
         networks.
       </p>
-      <div>
+      <div className="entered-promocode">
         <input 
             placeholder="Enter promo code" 
             onChange={(e) => setInputPromocode(e.target.value)} 

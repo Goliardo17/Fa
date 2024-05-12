@@ -2,7 +2,7 @@ import React from "react"
 
 export const Sorting = ({ amount, changeFilterForm }) => (
     <div className="sorting">
-      <p>There are {amount} products in this category</p>
+      <p>There are <span>{amount}</span> products in this category</p>
       <select 
         onChange={(e) => changeFilterForm("sorting", e.target.value)}
       >

@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import { debounce } from "../../../../../../../../../helpers/debounce"
-
-// import "./Range.scss";
+import "./Range.scss";
 
 export const Price = ({ filters, changeFilterForm }) => {
   const min = Number(filters.minPrice);
@@ -39,7 +38,6 @@ export const Price = ({ filters, changeFilterForm }) => {
 
   return (
     <div className="wrapper">
-      <h4>Price</h4>
       <div className="input-wrapper">
         <input
           className="input"

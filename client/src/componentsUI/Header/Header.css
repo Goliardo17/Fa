@@ -1,17 +1,51 @@
-.header-container {
+.header {
+    height: 21px;
+    width: 100%;
+
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    justify-content: space-between;
+}
 
-    ul, li {
-        margin: 0;
-        padding: 0;
+.left-menu {
+    display: flex;
+    flex-direction: row;
+    gap: 40px;
+
+    .logo {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
+    }
+    
+    .menu {
+        display: flex;
+        flex-direction: row;
+        gap: 20px;
     }
 }
 
-.menu {
-    
+.right-menu {
     display: flex;
     flex-direction: row;
-    gap: 20px;
+    gap: 8px;
+
+    .counter {
+        display: flex;
+        flex-direction: row;
+        gap: 8px;
+
+        p {
+            width: 20px;
+            height: 20px;
+
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+            color: white;
+            background-color: black;
+            border-radius: 50%;
+        }
+    }
 }

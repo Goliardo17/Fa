@@ -14,10 +14,9 @@ const FILTER_FORM = {
     pageNumber: 0
 }
 
-export const Shop = () => {
+export const Shop = ({ favoriteInfo, changeFavorite, creatBodyRequest }) => {
     const [filterForm, setFilterForm] = useState(FILTER_FORM)
     const [productsInfo, setProductsInfo] = useState({products:[], length: 0})
-    const [favoriteInfo, setFavoriteInfo] = useState([])
 
     // console.log(filterForm) // не знаю почему, на сервер приходит один запрос и ответ, а консоль выводится два раз (без строгого режима)
 
@@ -42,19 +41,6 @@ export const Shop = () => {
         return new URLSearchParams(filterForm);
     }
 
-    const changeFavorite = (product) => {
-        fetch(`http://localhost:8000/products/favorite/change`, {
-            method: "POST",
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                addproduct: product
-            })
-        })
-            .then((res) => res.json())
-            .then((data) => setFavoriteInfo(data))
-            .catch((err) => console.log(err))
-    }
-
     useEffect(() => {
         const params = requestObj()
         fetch(`http://localhost:8000/products?${params.toString()}`)
@@ -63,17 +49,10 @@ export const Shop = () => {
             .catch((err) => console.log(err))
     }, [filterForm])
 
-    useEffect(() => {
-        fetch(`http://localhost:8000/products/favorite`)
-            .then((res) => res.json())
-            .then((data) => setFavoriteInfo(data.favoriteProduct))
-            .catch((err) => console.log(err))
-    }, [])
-
     return(
         <div className="shop">
-            <Sidebar changeFilterForm={changeFilterForm} />
-            <Showcase changeFilterForm={changeFilterForm} productsInfo={productsInfo} changeFavorite={changeFavorite} favoriteInfo={favoriteInfo}/>
+            <Sidebar changeFilterForm={changeFilterForm} filterForm={filterForm} />
+            <Showcase changeFilterForm={changeFilterForm} productsInfo={productsInfo} changeFavorite={changeFavorite} favoriteInfo={favoriteInfo} creatBodyRequest={creatBodyRequest}/>
         </div>
     )
 }

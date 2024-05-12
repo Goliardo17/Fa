@@ -1,47 +1,32 @@
 import React from "react";
 
-export const Products = ({ products, changeFavorite, favoriteInfo }) => {
-
-  const addProductInCart = (product) => {
-    fetch("http://localhost:8000/cart/change", {
-      method: "POST",
-      headers: {'Content-Type': 'application/json'},
-      body: JSON.stringify({
-        product: product,
-        action: "add",
-        quantity: 1
-      })
-    })
-  }
-
-  return (
+export const Products = ({ products, changeFavorite, favoriteInfo, creatBodyRequest }) => (
     <div className="products">
       {
       products.length > 0 ? products.map((product) => (
-        <div key={product.id}>
-          {product.isSale ? <p>sale</p> : null}
-          {product.isNew ? <p>new</p> : null}
-          <img src={favoriteInfo.filter((favProduct) => favProduct.id === product.id).length ? "added-favorite.svg" : "none-favorite.svg"}
+        <div key={product.id} className="product-card">
+          {product.isSale ? <p className="sale">sale</p> : null}
+          {product.isNew ? <p className="new">new</p> : null}
+          <img className="favorite" src={favoriteInfo.filter((favProduct) => favProduct.id === product.id).length ? "added-favorite.svg" : "none-favorite.svg"}
             onClick={() => changeFavorite(product)}
           />
           <img 
-            src={product.image}
-            width={262} 
+            className="product-imeg"
+            src={product.image} 
           />
-          <p>{product.name}</p>
+          <p className="product-name">{product.name}</p>
 
-          <div>
-            <p>${product.price}</p>
+          <div className="product-price-cantainer">
+            <p className="product-price">${product.price}</p>
             {
-              product.oldPrice ? <p>${product.oldPrice}</p> : null
+              product.oldPrice ? <p className="product-old-price">${product.oldPrice}</p> : null
             }
           </div>
-          <div className="visible">
-          <button onClick={() => addProductInCart(product)}>Add to cart</button>
+          <div className="add-product">
+            <button onClick={() => creatBodyRequest(product, "add", 1)}>Add to cart</button>
           </div>
         </div>
       )) : <div>Sorry, there are no products for this request</div>
       }
     </div>
   );
-};

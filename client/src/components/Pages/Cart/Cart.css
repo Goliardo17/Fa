@@ -1,0 +1,45 @@
+.cart {
+    width: 900px;
+
+    display: flex;
+    flex-direction: column;
+
+    .order {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        gap: 40px;
+    }
+
+    .order-info {
+        width: ;
+        padding: 20px;
+
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+
+        h3 {
+            margin: 0;
+        }
+
+        .line {
+            height: 25px;
+
+            padding: 8px;
+            border-bottom: solid 1px gray;
+            
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            justify-content: space-between;
+            gap: 25px;
+        }
+
+        .total {
+            border: none;
+            border-top: solid 2px black;
+        }
+    }
+}
